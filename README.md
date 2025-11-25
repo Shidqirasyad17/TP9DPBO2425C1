@@ -16,11 +16,11 @@ Saya Shidqi Rasyad Firjatulah dengan NIM 2408156 mengerjakan TP9 pada mata kulia
 ### Views 
 - ViewPembalap.php -> Menampilkan list & form pembalap.
 - ViewSirkuit.php -> Menampilkan list & form sirkuit.
-- KontrakView.php dan KkontrakViewSirkuit.php -> Interface yang memastikan view punya method yang wajib
+- KontrakView.php dan KontrakViewSirkuit.php -> Interface yang memastikan view punya method yang wajib
 ### Presenter 
 - PresenterPembalap.php -> menghubungkan pembalap View dan model
 - PresenterSirkuit.php -> menghubungkan sirkuit view dan model
-- KontrakPresenter.php dan KontrakPresenterSirkuit.php -> inteface methode CRUD.
+- KontrakPresenter.php dan KontrakPresenterSirkuit.php -> interface methode CRUD.
   
 
 
