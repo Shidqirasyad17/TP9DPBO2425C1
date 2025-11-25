@@ -1,10 +1,7 @@
 <?php
 
 include_once("models/DB.php");
-
-/* ===============================
-    PEMBALAP
-=============================== */
+//pembalap
 include("models/TabelPembalap.php");
 include("views/ViewPembalap.php");
 include("presenters/PresenterPembalap.php");
@@ -13,10 +10,7 @@ $tabelPembalap = new TabelPembalap('localhost', 'mvp_db', 'root', '');
 $viewPembalap = new ViewPembalap();
 $presenterPembalap = new PresenterPembalap($tabelPembalap, $viewPembalap);
 
-
-/* ===============================
-    SIRKUIT
-=============================== */
+//sirkuti
 include("models/TabelSirkuit.php");
 include("views/ViewSirkuit.php");
 include("presenters/PresenterSirkuit.php");
@@ -25,18 +19,12 @@ $tabelSirkuit = new TabelSirkuit('localhost', 'mvp_db', 'root', '');
 $viewSirkuit = new ViewSirkuit();
 $presenterSirkuit = new PresenterSirkuit($tabelSirkuit, $viewSirkuit);
 
-
-/* ===============================
-    CEK ENTITY
-=============================== */
+//menentukan user apkaah sedang mengakses pembalap atausirkuti jika tidak ada request pemabalap = default
 $entity = $_GET['entity'] ?? ($_POST['entity'] ?? 'pembalap');
 
-
-/* ===============================
-    ROUTING GET
-=============================== */
+//menangani tampilan form 
 if (isset($_GET['screen'])) {
-
+//untuk pembalap
     if ($entity == 'pembalap') {
         if ($_GET['screen'] == 'add') {
             echo $presenterPembalap->tampilkanFormPembalap();
@@ -47,7 +35,7 @@ if (isset($_GET['screen'])) {
             exit;
         }
     }
-
+//untuk sirkuit
     if ($entity == 'sirkuit') {
         if ($_GET['screen'] == 'add') {
             echo $presenterSirkuit->tampilkanFormSirkuit();
@@ -59,13 +47,10 @@ if (isset($_GET['screen'])) {
         }
     }
 }
-
-
-/* ===============================
-    ROUTING POST
-=============================== */
+//action yang diambil add, edit, atau delet
 if (isset($_POST['action'])) {
 
+    //untuk pembalap
     if ($entity == 'pembalap') {
         if ($_POST['action'] == 'add') {
             $presenterPembalap->tambahPembalap(
@@ -84,6 +69,7 @@ if (isset($_POST['action'])) {
         }
     }
 
+    //untuk sirkuit
     if ($entity == 'sirkuit') {
         if ($_POST['action'] == 'addSirkuit') {
             $presenterSirkuit->tambahSirkuit(
@@ -106,16 +92,13 @@ if (isset($_POST['action'])) {
     exit;
 }
 
-
-/* ===============================
-    DEFAULT TAMPILAN
-=============================== */
-
+//menampilkan data pemabalap
 if ($entity == 'pembalap') {
     $presenterPembalap->initListPembalap();
     echo $presenterPembalap->tampilkanPembalap();
 }
 
+//menampilkan data sirkuti
 if ($entity == 'sirkuit') {
     $presenterSirkuit->initListSirkuit();
     echo $presenterSirkuit->tampilkanSirkuit();
