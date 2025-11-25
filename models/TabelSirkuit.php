@@ -5,10 +5,12 @@ include_once ("KontrakModelSirkuit.php");
 
 class TabelSirkuit extends DB implements KontrakModelSirkuit {
 
+    //konstruktor
     public function __construct($host, $db_name, $username, $password) {
         parent::__construct($host, $db_name, $username, $password);
     }
 
+    //mengambil semua data sirkuit
     public function getAllSirkuit(): array {
         $query = "SELECT * FROM sirkuit";
         $this->executeQuery($query);
@@ -17,12 +19,14 @@ class TabelSirkuit extends DB implements KontrakModelSirkuit {
         return is_array($result) ? $result : []; 
     }
 
+    //mengambil data sirkuit berdasarkan id
     public function getSirkuitById($id): ?array {
         $this->executeQuery("SELECT * FROM sirkuit WHERE id = :id", ['id' => $id]);
         $result = $this->getAllResult();
         return $result[0] ?? null;
     }
 
+    //menambahkan data sirkuit
     public function addSirkuit($namaSirkuit, $negara, $panjangKm, $jumlahTikungan): void {
             $query = "INSERT INTO sirkuit (namaSirkuit, negara, panjangKm, jumlahTikungan) 
               VALUES (:namaSirkuit, :negara, :panjangKm, :jumlahTikungan)";
@@ -36,7 +40,7 @@ class TabelSirkuit extends DB implements KontrakModelSirkuit {
 
     $this->executeQuery($query, $params);
     }
-    
+    //untuk mengedit data sirkuit
     public function updateSirkuit($id, $namaSirkuit, $negara, $panjangKm, $jumlahTikungan): void {
             $query = "UPDATE sirkuit 
               SET namaSirkuit = :namaSirkuit, 
@@ -55,7 +59,7 @@ class TabelSirkuit extends DB implements KontrakModelSirkuit {
 
     $this->executeQuery($query, $params);
 }
-    
+    //menghapus data sirkuit berdasarkan id
     public function deleteSirkuit($id): void {
            $query = "DELETE FROM sirkuit WHERE id = :id";
     $this->executeQuery($query, ['id' => $id]);

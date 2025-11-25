@@ -16,6 +16,7 @@ class PresenterSirkuit implements KontrakPresenterSirkuit
         $this->viewSirkuit = $viewSirkuit;
     }
 
+    //untuk menyiapkan data sirkuit sebelum ditampilkan
     public function initListSirkuit(): void
     {
         $data = $this->tabelSirkuit->getAllSirkuit();
@@ -32,11 +33,13 @@ class PresenterSirkuit implements KontrakPresenterSirkuit
         }
     }
 
+    //mengirim data sirkuit yang add ke view
     public function tampilkanSirkuit(): string
     {
         return $this->viewSirkuit->tampilSirkuit($this->listSirkuit);
     }
 
+    //mengirim data ke form vie
     public function tampilkanFormSirkuit($id = null): string
     {
         $data = null;
@@ -48,16 +51,19 @@ class PresenterSirkuit implements KontrakPresenterSirkuit
         return $this->viewSirkuit->tampilFormSirkuit($data);
     }
 
+    //meneruskan data baru ke model
     public function tambahSirkuit($namaSirkuit, $negara, $panjangKm, $jumlahTikungan): void
     {
         $this->tabelSirkuit->addSirkuit($namaSirkuit, $negara, $panjangKm, $jumlahTikungan);
     }
 
+    //meneruskan data yang sudah diedit ke model
     public function ubahSirkuit($id, $namaSirkuit, $negara, $panjangKm, $jumlahTikungan): void
     {
         $this->tabelSirkuit->updateSirkuit($id, $namaSirkuit, $negara, $panjangKm, $jumlahTikungan);
     }
 
+    //menghapus data sirkuit berdasarkan id
     public function hapusSirkuit($id): void
     {
         $this->tabelSirkuit->deleteSirkuit($id);

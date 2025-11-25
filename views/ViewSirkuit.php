@@ -5,22 +5,24 @@ include_once("models/Sirkuit.php");
 
 class ViewSirkuit implements KontrakViewSirkuit
 {
+    //konstruktor
     public function __construct() {}
 
 
+    //untuk halaman html tabel sirkuit
     public function tampilSirkuit($listSirkuit): string
     {
         $templatePath = __DIR__ . '/../template/skin.html';
         $template = file_get_contents($templatePath);
 
-      
+      //mengganti judul halaman
         $template = str_replace(
             'Daftar Pembalap',
             'Daftar Sirkuit',
             $template
         );
 
-       
+        //header tabel
         $theadSirkuit = '
             <thead>
                 <tr>
@@ -34,10 +36,11 @@ class ViewSirkuit implements KontrakViewSirkuit
             </thead>
         ';
 
-        
+        //mengganti thead lama dengan header tabel sirkuit
         $template = preg_replace('/<thead>.*?<\/thead>/s', $theadSirkuit, $template);
 
        
+        //mengisi body menggunakn data sirkuit
         $tbody = '';
         $no = 1;
         foreach ($listSirkuit as $s) {
@@ -57,18 +60,20 @@ class ViewSirkuit implements KontrakViewSirkuit
             $no++;
         }
 
-   
+        //menganti tempat baris tabel dena isi tabel tbdoy
         $template = str_replace('<!-- PHP will inject rows here -->', $tbody, $template);
-
+        //memperbauri total data, menampilkan total sirkuit berdasarkan jumlah elemen list sirkuit
         $template = str_replace('Total:', 'Total: ' . count($listSirkuit), $template);
 
-       
+       //mengubah tombol tambah
         $template = str_replace('+ Tambah Pembalap', '+ Tambah Sirkuit', $template);
         $template = str_replace('index.php?screen=add', 'index.php?entity=sirkuit&screen=add', $template);
 
+        //mengembalikan html yang sudah diproses
         return $template;
     }
 
+    //menampilkan form tambah atau edit
   public function tampilFormSirkuit($data = null): string
 {
     $template = file_get_contents(__DIR__ . '/../template/form_sirkuit.html');

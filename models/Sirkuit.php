@@ -9,6 +9,7 @@ class Sirkuit{
     private $jumlahTikungan;
 
 
+    //konsturktor
     public function __construct($id, $namaSirkuit, $negara, $panjangKm, $jumlahTikungan){
         $this->id = $id;
         $this->namaSirkuit = $namaSirkuit;
@@ -17,6 +18,7 @@ class Sirkuit{
         $this->jumlahTikungan = $jumlahTikungan;
     }
 
+    //getter setter
     public function getId(){
         return $this->id;
     }
